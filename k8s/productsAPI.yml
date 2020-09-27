@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: productsapi
+  name: productsapi-rs
   labels:
-    name: productsapi
+    name: productsapi-rs
 spec:
   replicas: 2
   selector:
