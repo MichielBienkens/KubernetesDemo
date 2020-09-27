@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,14 @@ namespace ProductsAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.Use(async (context, next) => {
+                IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
+                IPAddress ipAddress = ipHostInfo.AddressList[0];
+
+                context.Response.Headers.Add("X-Host-IP", $"{ipAddress}");
+                await next.Invoke();
+            });
 
             app.UseHttpsRedirection();
 
