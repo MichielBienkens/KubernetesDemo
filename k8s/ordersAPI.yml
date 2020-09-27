@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: ordersapi-rs
+  labels:
+    name: ordersapi-rs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ordersapi
+  template:
+    metadata:
+      labels:
+        app: ordersapi
+    spec:
+      containers:
+      - name: ordersapi
+        image: acrmbi.azurecr.io/ordersapi:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      imagePullSecrets:
+        - name:  regcred
+
+---
+
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: ordersapi-nodeport
+  spec:
+    type: NodePort
+    selector:
+      app: ordersapi
+    ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 80
