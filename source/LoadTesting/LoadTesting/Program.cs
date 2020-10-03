@@ -12,7 +12,7 @@ namespace LoadTesting
         {
             HttpClient client = new HttpClient
             {
-                BaseAddress = new Uri("http://51.137.28.90")
+                BaseAddress = new Uri("http://localhost:3001")
             };
 
             var tasks = new List<Task<HttpResponseMessage>>();
