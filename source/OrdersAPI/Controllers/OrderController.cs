@@ -22,7 +22,7 @@ namespace OrdersAPI.Controllers
             this.dbContext = dbContext;
             
             httpClient = httpClientFactory.CreateClient();
-            httpClient.BaseAddress = new Uri("http://productsapi-nodeport/api/");
+            httpClient.BaseAddress = new Uri("http://productsapi/api/");
         }
 
         [HttpGet]

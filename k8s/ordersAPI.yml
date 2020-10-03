@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: ordersapi-rs
+  name: ordersapi
   labels:
-    name: ordersapi-rs
+    name: ordersapi
 spec:
   replicas: 2
   selector:
@@ -35,9 +35,9 @@ spec:
   apiVersion: v1
   kind: Service
   metadata:
-    name: ordersapi-nodeport
+    name: ordersapi
   spec:
-    type: NodePort
+    type: LoadBalancer
     selector:
       app: ordersapi
     ports:

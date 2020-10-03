@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: productsapi-rs
+  name: productsapi
   labels:
-    name: productsapi-rs
+    name: productsapi
 spec:
   replicas: 2
   selector:
@@ -35,9 +35,9 @@ spec:
   apiVersion: v1
   kind: Service
   metadata:
-    name: productsapi-nodeport
+    name: productsapi
   spec:
-    type: NodePort
+    type: LoadBalancer
     selector:
       app: productsapi
     ports:
